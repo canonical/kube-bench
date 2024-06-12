@@ -293,6 +293,7 @@ version_mapping:
   "ack-1.0": "ack-1.0"
   "cis-1.6-k3s": "cis-1.6-k3s"
   "cis-1.24-microk8s": "cis-1.24-microk8s"
+  "cis-1.24-ck8s": "cis-1.24-ck8s"
   "tkgi-1.2.53": "tkgi-1.2.53"
   "k3s-cis-1.7": "k3s-cis-1.7"
   "k3s-cis-1.23": "k3s-cis-1.23"
@@ -342,6 +343,12 @@ target_mapping:
     - "etcd"
     - "policies"
   "cis-1.24-microk8s":
+    - "master"
+    - "etcd"
+    - "node"
+    - "controlplane"
+    - "policies"
+  "cis-1.24-ck8s":
     - "master"
     - "etcd"
     - "node"
