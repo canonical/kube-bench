@@ -12,6 +12,9 @@ master:
       - /var/snap/k8s/common/args/kube-controller-manager
     kubeconfig:
       - /etc/kubernetes/controller.conf
+  etcd:
+    confs:
+      - /etc/default/etcd
 
 node:
   kubelet:
