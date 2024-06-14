@@ -33,3 +33,8 @@ node:
       - /etc/kubernetes/proxy.conf
     svc:
       - "/etc/systemd/system/snap.k8s.kube-proxy.service"
+
+controlplane:
+  apiserver:
+    confs:
+      - /var/snap/k8s/common/args/kube-apiserver
