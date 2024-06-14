@@ -4,17 +4,27 @@ master:
   apiserver:
     confs:
       - /var/snap/k8s/common/args/kube-apiserver
+    bins:
+      - kube-apiserver
   scheduler:
     confs:
       - /var/snap/k8s/common/args/kube-scheduler
+    kubeconfig:
+      - /etc/kubernetes/scheduler.conf
+    bins:
+      - kube-scheduler
   controllermanager:
     confs:
       - /var/snap/k8s/common/args/kube-controller-manager
+    bins:
+      - kube-controller-manager
     kubeconfig:
       - /etc/kubernetes/controller.conf
   etcd:
     confs:
       - /etc/default/etcd
+    bins:
+      - etcd
 
 node:
   kubelet:
@@ -26,6 +36,8 @@ node:
       - "/var/snap/k8s/common/args/kubelet"
     kubeconfig:
       - "/etc/kubernetes/kubelet.conf"
+    bins:
+      - kubelet
   proxy:
     confs:
       - /var/snap/k8s/common/args/kube-proxy
