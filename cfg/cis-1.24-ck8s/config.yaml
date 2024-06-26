@@ -24,7 +24,7 @@ master:
     confs:
       - /etc/default/etcd
     bins:
-      - etcd
+      - /usr/bin/etcd
 
 node:
   kubelet:
