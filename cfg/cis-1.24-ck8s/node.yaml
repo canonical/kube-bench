@@ -389,7 +389,7 @@ groups:
             - flag: --tls-private-key-file
               path: '{.tlsPrivateKeyFile}'
         remediation: |
-          Edit the kubelet service file $kubeletconf on each worker node and
+          Edit the kubelet configuration file $kubeletconf on each worker node and
           set the following arguments:
 
           ```
@@ -418,7 +418,7 @@ groups:
               set: false
           bin_op: or
         remediation: |
-          Edit the kubelet service file $kubeletconf on each worker node and
+          Edit the kubelet configuration file $kubeletconf on each worker node and
           remove the --rotate-certificates=false argument.
 
           Restart the kubelet service.
