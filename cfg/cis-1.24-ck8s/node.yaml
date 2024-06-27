@@ -166,15 +166,11 @@ groups:
                 op: eq
                 value: false
         remediation: |
-          If using a Kubelet config file, edit the file to set `authentication: anonymous: enabled` to
-          `false`.
-          If using executable arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           `--anonymous-auth=false`
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: true
 
       - id: 4.2.2
@@ -189,14 +185,11 @@ groups:
                 op: nothave
                 value: AlwaysAllow
         remediation: |
-          If using a Kubelet config file, edit the file to set `authorization.mode` to Webhook. If
-          using executable arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_AUTHZ_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           --authorization-mode=Webhook
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: true
 
       - id: 4.2.3
@@ -208,15 +201,12 @@ groups:
             - flag: --client-ca-file
               path: '{.authentication.x509.clientCAFile}'
         remediation: |
-          If using a Kubelet config file, edit the file to set `authentication.x509.clientCAFile` to
-          the location of the client CA file.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_AUTHZ_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           --client-ca-file=<path/to/client-ca-file>
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
+
         scored: true
 
       - id: 4.2.4
@@ -235,14 +225,11 @@ groups:
               path: '{.readOnlyPort}'
               set: false
         remediation: |
-          If using a Kubelet config file, edit the file to set `readOnlyPort` to 0.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           --read-only-port=0
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.5
@@ -261,15 +248,11 @@ groups:
               set: false
           bin_op: or
         remediation: |
-          If using a Kubelet config file, edit the file to set `streamingConnectionIdleTimeout` to a
-          value other than 0.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           --streaming-connection-idle-timeout=5m
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.6
@@ -284,14 +267,11 @@ groups:
                 op: eq
                 value: true
         remediation: |
-          If using a Kubelet config file, edit the file to set `protectKernelDefaults` to `true`.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and set the below argument.
           --protect-kernel-defaults=true
-          Based on your system, restart the kubelet service. For example:
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: true
 
       - id: 4.2.7
@@ -310,14 +290,11 @@ groups:
               set: false
           bin_op: or
         remediation: |
-          If using a Kubelet config file, edit the file to set `makeIPTablesUtilChains` to `true`.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          remove the --make-iptables-util-chains argument from the
-          KUBELET_SYSTEM_PODS_ARGS variable.
-          Based on your system, restart the kubelet service. For example:
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Edit the kubelet configuration file
+          $kubeletconf on each worker node and
+          remove the --make-iptables-util-chains argument.
+          Restart the kubelet service. For example:
+          snap restart k8s.kubelet
         scored: true
 
       - id: 4.2.8
@@ -331,12 +308,10 @@ groups:
             - flag: --hostname-override
               set: false
         remediation: |
-          Edit the kubelet service file $kubeletsvc
-          on each worker node and remove the --hostname-override argument from the
-          KUBELET_SYSTEM_PODS_ARGS variable.
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Edit the kubelet configuration file $kubeletconf
+          on each worker node and remove the --hostname-override argument.
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.9
@@ -355,13 +330,10 @@ groups:
               set: false
           bin_op: or
         remediation: |
-          If using a Kubelet config file, edit the file to set `eventRecordQPS` to an appropriate level.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Edit the kubelet configuration file $kubeletconf on each worker node and
+          set the --event-qps parameter as appropriate.
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.10
@@ -375,17 +347,12 @@ groups:
             - flag: --tls-private-key-file
               path: '{.tlsPrivateKeyFile}'
         remediation: |
-          If using a Kubelet config file, edit the file to set `tlsCertFile` to the location
-          of the certificate file to use to identify this Kubelet, and `tlsPrivateKeyFile`
-          to the location of the corresponding private key file.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          set the below parameters in KUBELET_CERTIFICATE_ARGS variable.
+          Edit the kubelet service file $kubeletconf on each worker node and
+          set the below arguments:
           --tls-cert-file=<path/to/tls-certificate-file>
           --tls-private-key-file=<path/to/tls-key-file>
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.11
@@ -404,15 +371,10 @@ groups:
               set: false
           bin_op: or
         remediation: |
-          If using a Kubelet config file, edit the file to add the line `rotateCertificates` to `true` or
-          remove it altogether to use the default value.
-          If using command line arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
-          remove --rotate-certificates=false argument from the KUBELET_CERTIFICATE_ARGS
-          variable.
-          Based on your system, restart the kubelet service. For example,
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Edit the kubelet service file $kubeletconf on each worker node and
+          remove the --rotate-certificates=false argument.
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: true
 
       - id: 4.2.12
@@ -431,12 +393,11 @@ groups:
               path: '{.featureGates.RotateKubeletServerCertificate}'
               set: false
         remediation: |
-          Edit the kubelet service file $kubeletsvc
-          on each worker node and set the below parameter in KUBELET_CERTIFICATE_ARGS variable.
-          --feature-gates=RotateKubeletServerCertificate=true
-          Based on your system, restart the kubelet service. For example:
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Edit the kubelet configuration file $kubeletconf on each worker node and
+          set the argument --feature-gates=RotateKubeletServerCertificate=true
+          on each worker node.
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
 
       - id: 4.2.13
@@ -451,14 +412,9 @@ groups:
                 op: valid_elements
                 value: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
         remediation: |
-          If using a Kubelet config file, edit the file to set `TLSCipherSuites` to
-          TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
-          or to a subset of these values.
-          If using executable arguments, edit the kubelet service file
-          $kubeletsvc on each worker node and
+          Edit the kubelet configuration file $kubeletconf on each worker node and
           set the --tls-cipher-suites parameter as follows, or to a subset of these values.
           --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
-          Based on your system, restart the kubelet service. For example:
-          systemctl daemon-reload
-          systemctl restart kubelet.service
+          Restart the kubelet service. For example,
+          snap restart k8s.kubelet
         scored: false
