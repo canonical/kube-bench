@@ -20,8 +20,11 @@ groups:
           Follow the etcd service documentation and configure TLS encryption.
           Then, edit the etcd daemon configuration file $etcdconf
           on the master node and set the following variables.
+
+          ```
           ETCD_CERT_FILE=</path/to/ca-file>
           ETCD_KEY_FILE=</path/to/key-file>
+          ```
         scored: true
 
       - id: 2.2
@@ -36,7 +39,8 @@ groups:
         remediation: |
           Edit the etcd daemon configuration file $etcdconf on the master
           node and set the following variable.
-          ETCD_CLIENT_CERT_AUTH=true
+
+          `ETCD_CLIENT_CERT_AUTH=true`
         scored: true
 
       - id: 2.3
@@ -54,7 +58,8 @@ groups:
         remediation: |
           Edit the etcd daemon configuration file $etcdconf on the master
           node and either remove the ETCD_AUTO_TLS variable or set it to false.
-            ETCD_AUTO_TLS=false
+
+          `ETCD_AUTO_TLS=false`
         scored: true
 
       - id: 2.4
@@ -71,8 +76,11 @@ groups:
           for your etcd cluster.
           Then, edit the etcd daemon configuration file $etcdconf on the
           master node and set the following variables.
+
+          ```
           ETCD_PEER_CERT_FILE=</path/to/peer-cert-file>
           ETCD_PEER_KEY_FILE=</path/to/peer-key-file>
+          ```
         scored: true
 
       - id: 2.5
@@ -87,7 +95,8 @@ groups:
         remediation: |
           Edit the etcd daemon configuration file $etcdconf on the master
           node and set the following argument.
-          ETCD_PEER_CLIENT_CERT_AUTH=true
+
+          `ETCD_PEER_CLIENT_CERT_AUTH=true`
         scored: true
 
       - id: 2.6
@@ -105,7 +114,8 @@ groups:
         remediation: |
           Edit the etcd daemon configuration file $etcdconf on the master
           node and either remove the ETCD_PEER_AUTO_TLS parameter or set it to false.
-          ETCD_PEER_AUTO_TLS=false
+
+          `ETCD_PEER_AUTO_TLS=false`
         scored: true
 
       - id: 2.7
@@ -119,5 +129,6 @@ groups:
           etcd service.
           Then, edit the etcd daemon configuration file $etcdconf on the
           master node and set the following argument.
-          ETCD_TRUSTED_CA_FILE=</path/to/ca-file>
+
+          `ETCD_TRUSTED_CA_FILE=</path/to/ca-file>`
         scored: false
