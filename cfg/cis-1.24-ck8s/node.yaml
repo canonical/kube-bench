@@ -19,7 +19,9 @@ groups:
                 value: "644"
         remediation: |
           Run the below command (based on the file location on your system) on the each worker node.
-          For example, chmod 600 $kubeletsvc
+
+
+          `chmod 600 $kubeletsvc`
         scored: true
 
       - id: 4.1.2
@@ -32,8 +34,9 @@ groups:
             - flag: "File not found"
         remediation: |
             Run the below command (based on the file location on your system) on the each worker node.
-            For example,
-            chown root:root $kubeletsvc
+
+
+            `chown root:root $kubeletsvc`
         scored: true
 
       - id: 4.1.3
@@ -48,9 +51,10 @@ groups:
                 op: bitmask
                 value: "644"
         remediation: |
-          Run the below command (based on the file location on your system) on the each worker node.
-          For example,
-          chmod 600 $proxykubeconfig
+          Run the below command on the each worker node.
+
+
+          `chmod 600 $proxykubeconfig`
         scored: false
 
       - id: 4.1.4
@@ -61,8 +65,10 @@ groups:
           test_items:
             - flag: root:root
         remediation: |
-          Run the below command (based on the file location on your system) on the each worker node.
-          For example, chown root:root $proxykubeconfig
+          Run the below command on the each worker node.
+
+
+          `chown root:root $proxykubeconfig`
         scored: false
 
       - id: 4.1.5
@@ -75,9 +81,10 @@ groups:
                 op: bitmask
                 value: "600"
         remediation: |
-          Run the below command (based on the file location on your system) on the each worker node.
-          For example,
-          chmod 600 $kubeletkubeconfig
+          Run the below command on the each worker node.
+
+
+          `chmod 600 $kubeletkubeconfig`
         scored: true
 
       - id: 4.1.6
@@ -87,9 +94,10 @@ groups:
           test_items:
             - flag: root:root
         remediation: |
-          Run the below command (based on the file location on your system) on the each worker node.
-          For example,
-          chown root:root $kubeletkubeconfig
+          Run the below command on the each worker node.
+
+
+          `chown root:root $kubeletkubeconfig`
         scored: true
 
       - id: 4.1.7
@@ -106,7 +114,10 @@ groups:
                 value: "600"
         remediation: |
           Run the following command to modify the file permissions of the
-          --client-ca-file chmod 600 <filename>
+          --client-ca-file.
+
+
+          `chmod 600 <filename>`
         scored: false
 
       - id: 4.1.8
@@ -123,7 +134,9 @@ groups:
                 value: root:root
         remediation: |
           Run the following command to modify the ownership of the --client-ca-file.
-          chown root:root <filename>
+
+
+          `chown root:root <filename>`
         scored: false
 
       - id: 4.1.9
@@ -137,7 +150,9 @@ groups:
                 value: "600"
         remediation: |
           Run the following command (using the config file location identified in the Audit step)
-          chmod 600 $kubeletconf
+
+
+          `chmod 600 $kubeletconf`
         scored: false
 
       - id: 4.1.10
@@ -148,7 +163,9 @@ groups:
             - flag: root:root
         remediation: |
           Run the following command (using the config file location identified in the Audit step)
-          chown root:root $kubeletconf
+
+
+          `chown root:root $kubeletconf`
         scored: false
 
   - id: 4.2
@@ -168,9 +185,14 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
+
+
           `--anonymous-auth=false`
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.2
@@ -187,9 +209,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
-          --authorization-mode=Webhook
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          `--authorization-mode=Webhook`
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.3
@@ -203,10 +228,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
-          --client-ca-file=<path/to/client-ca-file>
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
 
+          `--client-ca-file=<path/to/client-ca-file>`
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.4
@@ -227,9 +254,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
-          --read-only-port=0
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          `--read-only-port=0`
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.5
@@ -250,9 +280,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
-          --streaming-connection-idle-timeout=5m
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          `--streaming-connection-idle-timeout=5m`
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.6
@@ -269,9 +302,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file
           $kubeletconf on each worker node and set the below argument.
-          --protect-kernel-defaults=true
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          `--protect-kernel-defaults=true`
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.7
@@ -293,8 +329,10 @@ groups:
           Edit the kubelet configuration file
           $kubeletconf on each worker node and
           remove the --make-iptables-util-chains argument.
-          Restart the kubelet service. For example:
-          snap restart k8s.kubelet
+
+          Restart the kubelet service.
+
+          For example: `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.8
@@ -310,8 +348,10 @@ groups:
         remediation: |
           Edit the kubelet configuration file $kubeletconf
           on each worker node and remove the --hostname-override argument.
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.9
@@ -332,8 +372,10 @@ groups:
         remediation: |
           Edit the kubelet configuration file $kubeletconf on each worker node and
           set the --event-qps parameter as appropriate.
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.10
@@ -349,10 +391,15 @@ groups:
         remediation: |
           Edit the kubelet service file $kubeletconf on each worker node and
           set the below arguments:
+
+          ```
           --tls-cert-file=<path/to/tls-certificate-file>
-          --tls-private-key-file=<path/to/tls-key-file>
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+          --tls-cert-file=<path/to/tls-certificate-file>
+          ```
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.11
@@ -373,8 +420,10 @@ groups:
         remediation: |
           Edit the kubelet service file $kubeletconf on each worker node and
           remove the --rotate-certificates=false argument.
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: true
 
       - id: 4.2.12
@@ -396,8 +445,10 @@ groups:
           Edit the kubelet configuration file $kubeletconf on each worker node and
           set the argument --feature-gates=RotateKubeletServerCertificate=true
           on each worker node.
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
 
       - id: 4.2.13
@@ -414,7 +465,12 @@ groups:
         remediation: |
           Edit the kubelet configuration file $kubeletconf on each worker node and
           set the --tls-cipher-suites parameter as follows, or to a subset of these values.
+
+          ```
           --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
-          Restart the kubelet service. For example,
-          snap restart k8s.kubelet
+          ```
+
+          Restart the kubelet service.
+
+          For example, `snap restart k8s.kubelet`
         scored: false
