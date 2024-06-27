@@ -18,7 +18,7 @@ groups:
                 op: bitmask
                 value: "644"
         remediation: |
-          Run the below command (based on the file location on your system) on the each worker node.
+          Run the following command on each worker node.
 
 
           `chmod 600 $kubeletsvc`
@@ -33,7 +33,7 @@ groups:
             - flag: root:root
             - flag: "File not found"
         remediation: |
-            Run the below command (based on the file location on your system) on the each worker node.
+            Run the following command on each worker node.
 
 
             `chown root:root $kubeletsvc`
@@ -51,7 +51,7 @@ groups:
                 op: bitmask
                 value: "644"
         remediation: |
-          Run the below command on the each worker node.
+          Run the following command on the each worker node.
 
 
           `chmod 600 $proxykubeconfig`
@@ -65,7 +65,7 @@ groups:
           test_items:
             - flag: root:root
         remediation: |
-          Run the below command on the each worker node.
+          Run the following command on the each worker node.
 
 
           `chown root:root $proxykubeconfig`
@@ -81,7 +81,7 @@ groups:
                 op: bitmask
                 value: "600"
         remediation: |
-          Run the below command on the each worker node.
+          Run the following command on the each worker node.
 
 
           `chmod 600 $kubeletkubeconfig`
@@ -94,7 +94,7 @@ groups:
           test_items:
             - flag: root:root
         remediation: |
-          Run the below command on the each worker node.
+          Run the following command on the each worker node.
 
 
           `chown root:root $kubeletkubeconfig`
@@ -184,7 +184,7 @@ groups:
                 value: false
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
 
           `--anonymous-auth=false`
@@ -208,7 +208,7 @@ groups:
                 value: AlwaysAllow
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
           `--authorization-mode=Webhook`
 
@@ -227,7 +227,7 @@ groups:
               path: '{.authentication.x509.clientCAFile}'
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
           `--client-ca-file=<path/to/client-ca-file>`
 
@@ -253,7 +253,7 @@ groups:
               set: false
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
           `--read-only-port=0`
 
@@ -279,7 +279,7 @@ groups:
           bin_op: or
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
           `--streaming-connection-idle-timeout=5m`
 
@@ -301,7 +301,7 @@ groups:
                 value: true
         remediation: |
           Edit the kubelet configuration file
-          $kubeletconf on each worker node and set the below argument.
+          $kubeletconf on each worker node and set the following argument.
 
           `--protect-kernel-defaults=true`
 
@@ -390,7 +390,7 @@ groups:
               path: '{.tlsPrivateKeyFile}'
         remediation: |
           Edit the kubelet service file $kubeletconf on each worker node and
-          set the below arguments:
+          set the following arguments:
 
           ```
           --tls-cert-file=<path/to/tls-certificate-file>
