@@ -3,7 +3,7 @@ controls:
 version: "cis-1.24"
 id: 2
 text: "dqlite Node Configuration"
-type: "dqlite"
+type: "etcdd"
 groups:
   - id: 2
     text: "dqlite Node Configuration"
@@ -21,7 +21,7 @@ groups:
         scored: true
       - id: 2.2
         text: "Ensure that the --peer-client-cert-auth argument is set to true (Automated)"
-        audit: "/bin/cat $etcdconf | /bin/grep enable-tls || true"
+        audit: "/bin/cat $dqliteconf | /bin/grep enable-tls || true"
         tests:
           bin_op: or
           test_items:
