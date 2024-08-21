@@ -3,7 +3,7 @@ controls:
 version: "cis-1.24"
 id: 2
 text: "dqlite Node Configuration"
-type: "etcdd"
+type: "etcd"
 groups:
   - id: 2
     text: "dqlite Node Configuration"
