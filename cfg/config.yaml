@@ -12,6 +12,7 @@ master:
     - scheduler
     - controllermanager
     - etcd
+    - dqlite
     - flanneld
     # kubernetes is a component to cover the config file /etc/kubernetes/config that is referred to in the benchmark
     - kubernetes
@@ -109,6 +110,17 @@ master:
       - /var/lib/rancher/k3s/server/db/etcd/config
     defaultconf: /etc/kubernetes/manifests/etcd.yaml
     defaultdatadir: /var/lib/etcd/default.etcd
+
+  dqlite:
+    optional: true
+    bins:
+      - "k8s-dqlite"
+    datadirs:
+      - /var/snap/k8s/common/var/lib/k8s-dqlite
+    confs:
+      - /var/snap/k8s/common/args/k8s-dqlite
+    defaultconf: /var/snap/k8s/common/args/k8s-dqlite
+    defaultdatadir: /var/snap/k8s/common/var/lib/k8s-dqlite
 
   flanneld:
     optional: true
@@ -294,6 +306,7 @@ version_mapping:
   "cis-1.6-k3s": "cis-1.6-k3s"
   "cis-1.24-microk8s": "cis-1.24-microk8s"
   "cis-1.24-ck8s": "cis-1.24-ck8s"
+  "ck8s-cis-1.24": "ck8s-cis-1.24"
   "tkgi-1.2.53": "tkgi-1.2.53"
   "k3s-cis-1.7": "k3s-cis-1.7"
   "k3s-cis-1.23": "k3s-cis-1.23"
@@ -354,6 +367,12 @@ target_mapping:
     - "node"
     - "controlplane"
     - "policies"
+  "ck8s-cis-1.24":
+    - "master"
+    - "dqlite"
+    - "node"
+    - "controlplane"
+    - "policies"    
   "cis-1.7":
     - "master"
     - "node"
