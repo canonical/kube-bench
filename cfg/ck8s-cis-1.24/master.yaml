@@ -115,7 +115,7 @@ groups:
         remediation: |
           Run the following command on the control plane node.
 
-          `chown root:root $etcdconf`
+          `chown root:root $dqliteconf`
         scored: true
 
       - id: 1.1.9
