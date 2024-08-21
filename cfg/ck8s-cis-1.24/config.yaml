@@ -20,11 +20,6 @@ master:
       - kube-controller-manager
     kubeconfig:
       - /etc/kubernetes/controller.conf
-  dqlite:
-    confs:
-      - /var/snap/k8s/common/args/k8s-dqlite
-    bins:
-      - /snap/k8s/795/bin/k8s-dqlite
 
 node:
   kubelet:
