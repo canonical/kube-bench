@@ -319,8 +319,8 @@ version_mapping:
   "ack-1.0": "ack-1.0"
   "cis-1.6-k3s": "cis-1.6-k3s"
   "cis-1.24-microk8s": "cis-1.24-microk8s"
-  "cis-1.24-ck8s": "cis-1.24-ck8s"
-  "ck8s-cis-1.24": "ck8s-cis-1.24"
+  "ck8s-etcd-cis-1.24": "ck8s-etcd-cis-1.24"  
+  "ck8s-dqlite-cis-1.24": "ck8s-dqlite-cis-1.24"
   "tkgi-1.2.53": "tkgi-1.2.53"
   "k3s-cis-1.7": "k3s-cis-1.7"
   "k3s-cis-1.23": "k3s-cis-1.23"
@@ -375,13 +375,13 @@ target_mapping:
     - "node"
     - "controlplane"
     - "policies"
-  "cis-1.24-ck8s":
+  "ck8s-etcd-cis-1.24":
     - "master"
     - "etcd"
     - "node"
     - "controlplane"
     - "policies"
-  "ck8s-cis-1.24":
+  "ck8s-dqlite-cis-1.24":
     - "master"
     - "node"
     - "controlplane"
