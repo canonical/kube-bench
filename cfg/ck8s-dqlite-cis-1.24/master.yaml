@@ -9,7 +9,7 @@ groups:
     text: "Control Plane Node Configuration Files"
     checks:
       - id: 1.1.1
-        text: "Ensure that the API server configuration file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the API server configuration file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e $apiserverconf; then stat -c permissions=%a $apiserverconf; fi'"
         tests:
           test_items:
@@ -36,7 +36,7 @@ groups:
         scored: true
 
       - id: 1.1.3
-        text: "Ensure that the controller manager configuration file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the controller manager configuration file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e $controllermanagerconf; then stat -c permissions=%a $controllermanagerconf; fi'"
         tests:
           test_items:
@@ -63,7 +63,7 @@ groups:
         scored: true
 
       - id: 1.1.5
-        text: "Ensure that the scheduler configuration file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the scheduler configuration file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e $schedulerconf; then stat -c permissions=%a $schedulerconf; fi'"
         tests:
           test_items:
@@ -90,8 +90,8 @@ groups:
         scored: true
 
       - id: 1.1.7
-        text: "Ensure that the etcd configuration file permissions are set to 644 or more restrictive (Automated)"
-        audit: "/bin/sh -c 'if test -e $etcdconf; then find $etcdconf -name '*etcd*' | xargs stat -c permissions=%a; fi'"
+        text: "Ensure that the dqlite configuration file permissions are set to 644 or more restrictive (Automated)"
+        audit: "/bin/sh -c 'if test -e $dqliteconf; then find $dqliteconf -name '*dqlite*' | xargs stat -c permissions=%a; fi'"
         use_multiple_values: true
         tests:
           test_items:
@@ -102,12 +102,12 @@ groups:
         remediation: |
           Run the following command on the control plane node.
 
-          `chmod 644 $etcdconf`
+          `chmod 644 $dqliteconf`
         scored: true
 
       - id: 1.1.8
-        text: "Ensure that the etcd configuration file ownership is set to root:root (Automated)"
-        audit: "/bin/sh -c 'if test -e $etcdconf; then find $etcdconf -name '*etcd*' | xargs stat -c %U:%G; fi'"
+        text: "Ensure that the dqlite configuration file ownership is set to root:root (Automated)"
+        audit: "/bin/sh -c 'if test -e $dqliteconf; then find $dqliteconf -name '*dqlite*' | xargs stat -c %U:%G; fi'"
         use_multiple_values: true
         tests:
           test_items:
@@ -115,11 +115,11 @@ groups:
         remediation: |
           Run the following command on the control plane node.
 
-          `chown root:root $etcdconf`
+          `chown root:root $dqliteconf`
         scored: true
 
       - id: 1.1.9
-        text: "Ensure that the Container Network Interface file permissions are set to 600 or more restrictive (Manual)"
+        text: "Ensure that the Container Network Interface file permissions are set to 600 (Manual)"
         audit: |
           ps -ef | grep $kubeletbin | grep -- --cni-conf-dir | sed 's%.*cni-conf-dir[= ]\([^ ]*\).*%\1%' | xargs -I{} find {} -mindepth 1 | xargs --no-run-if-empty stat -c permissions=%a
           find /etc/cni/net.d/10-calico.conflist -type f 2> /dev/null | xargs --no-run-if-empty stat -c permissions=%a
@@ -129,11 +129,11 @@ groups:
             - flag: "permissions"
               compare:
                 op: bitmask
-                value: "644"
+                value: "600"
         remediation: |
           Run the following command on the control plane node.
 
-          `chmod 644 <path/to/cni/files>`
+          `chmod 600 <path/to/cni/files>`
         scored: false
 
       - id: 1.1.10
@@ -152,9 +152,9 @@ groups:
         scored: false
 
       - id: 1.1.11
-        text: "Ensure that the etcd data directory permissions are set to 700 or more restrictive (Automated)"
+        text: "Ensure that the dqlite data directory permissions are set to 700 or more restrictive (Automated)"
         audit: |
-          DATA_DIR='/var/lib/etcd'
+          DATA_DIR='/var/snap/k8s/common/var/lib/k8s-dqlite'
           stat -c permissions=%a "$DATA_DIR"
         tests:
           test_items:
@@ -163,29 +163,29 @@ groups:
                 op: bitmask
                 value: "700"
         remediation: |
-          On the etcd server node, get the etcd data directory, passed as an argument --data-dir,
-          from the command 'ps -ef | grep etcd'.
+          On the dqlite server node, get the dqlite data directory, passed as an argument --storage-dir,
+          from the command 'ps -ef | grep k8s-dqlite | grep storage-dir'.
 
-          `chmod 700 /var/lib/etcd`
+          `chmod 700 /var/snap/k8s/common/var/lib/k8s-dqlite`
         scored: true
 
       - id: 1.1.12
-        text: "Ensure that the etcd data directory ownership is set to etcd:etcd (Automated)"
+        text: "Ensure that the dqlite data directory ownership is set to root:root (Automated)"
         audit: |
-          DATA_DIR='/var/lib/etcd'
+          DATA_DIR='/var/snap/k8s/common/var/lib/k8s-dqlite'
           stat -c %U:%G "$DATA_DIR"
         tests:
           test_items:
-            - flag: "etcd:etcd"
+            - flag: "root:root"
         remediation: |
-          On the etcd server node, get the etcd data directory, passed as an argument --data-dir,
-          from the command 'ps -ef | grep etcd'.
+          On the dqlite server node, get the dqlite data directory, passed as an argument --storage-dir,
+          from the command 'ps -ef | grep k8s-dqlite | grep storage-dir'.
 
-          `chown root:root /var/lib/etcd`
+          `chown root:root /var/snap/k8s/common/var/lib/k8s-dqlite`
         scored: true
 
       - id: 1.1.13
-        text: "Ensure that the admin.conf file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the admin.conf file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e /etc/kubernetes/admin.conf; then stat -c permissions=%a /etc/kubernetes/admin.conf; fi'"
         tests:
           test_items:
@@ -212,7 +212,7 @@ groups:
         scored: true
 
       - id: 1.1.15
-        text: "Ensure that the scheduler.conf file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the scheduler.conf file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e $schedulerkubeconfig; then stat -c permissions=%a $schedulerkubeconfig; fi'"
         tests:
           test_items:
@@ -239,7 +239,7 @@ groups:
         scored: true
 
       - id: 1.1.17
-        text: "Ensure that the controller-manager.conf file permissions are set to 600 or more restrictive (Automated)"
+        text: "Ensure that the controller-manager.conf file permissions are set to 600 (Automated)"
         audit: "/bin/sh -c 'if test -e $controllermanagerkubeconfig; then stat -c permissions=%a $controllermanagerkubeconfig; fi'"
         tests:
           test_items:
@@ -279,7 +279,7 @@ groups:
         scored: true
 
       - id: 1.1.20
-        text: "Ensure that the Kubernetes PKI certificate file permissions are set to 600 or more restrictive (Manual)"
+        text: "Ensure that the Kubernetes PKI certificate file permissions are set to 600 (Manual)"
         audit: "find /etc/kubernetes/pki/ -name '*.crt' | xargs stat -c permissions=%a"
         use_multiple_values: true
         tests:
@@ -721,25 +721,6 @@ groups:
           `--service-account-key-file=<filename>`
         scored: true
 
-      - id: 1.2.25
-        text: "Ensure that the --etcd-certfile and --etcd-keyfile arguments are set as appropriate (Automated)"
-        audit: "/bin/ps -ef | grep $apiserverbin | grep -v grep"
-        tests:
-          bin_op: and
-          test_items:
-            - flag: "--etcd-certfile"
-            - flag: "--etcd-keyfile"
-        remediation: |
-          Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd.
-          Then, edit the API server configuration file $apiserverconf
-          on the control plane node and set the etcd certificate and key file parameters.
-
-          ```
-          --etcd-certfile=<path/to/client-certificate-file>
-          --etcd-keyfile=<path/to/client-key-file>
-          ```
-        scored: true
-
       - id: 1.2.26
         text: "Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate (Automated)"
         audit: "/bin/ps -ef | grep $apiserverbin | grep -v grep"
@@ -771,20 +752,6 @@ groups:
           on the control plane node and set the client certificate authority file.
 
           `--client-ca-file=<path/to/client-ca-file>`
-        scored: true
-
-      - id: 1.2.28
-        text: "Ensure that the --etcd-cafile argument is set as appropriate (Automated)"
-        audit: "/bin/ps -ef | grep $apiserverbin | grep -v grep"
-        tests:
-          test_items:
-            - flag: "--etcd-cafile"
-        remediation: |
-          Follow the Kubernetes documentation and set up the TLS connection between the apiserver and etcd.
-          Then, edit the API server configuration file $apiserverconf
-          on the control plane node and set the etcd certificate authority file parameter.
-
-          `--etcd-cafile=<path/to/ca-file>`
         scored: true
 
       - id: 1.2.29
