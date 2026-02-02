@@ -22,9 +22,9 @@ master:
       - /etc/kubernetes/controller.conf
   etcd:
     confs:
-      - /var/snap/k8s/common/args/k8s-dqlite
+      - /var/snap/k8s/common/args/etcd
     bins:
-      - k8s-dqlite
+      - etcd
 
 etcd:
   components:
@@ -32,12 +32,11 @@ etcd:
 
   etcd:
     bins:
-      - "k8s-dqlite"
+      - "etcd"
     confs:
-      - /var/snap/microk8s/common/args/k8s-dqlite
-    defaultconf: /var/snap/microk8s/common/args/k8s-dqlite
-    defaultdatadir: /var/snap/k8s/common/var/lib/k8s-dqlite
-
+      - /var/snap/k8s/common/args/etcd
+    defaultconf: /var/snap/k8s/common/args/etcd
+    defaultdatadir: /var/snap/k8s/common/var/lib/etcd/data
 node:
   kubelet:
     cafile:
