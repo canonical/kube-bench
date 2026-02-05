@@ -57,7 +57,7 @@ groups:
                 op: eq
                 value: false
         remediation: |
-          Edit the etcd pod specification file $etcdconf on the master
+          Edit the etcd pod specification file $etcdconf on the control plane
           node and either remove the --auto-tls parameter or set it to false.
             --auto-tls=false
         scored: true
