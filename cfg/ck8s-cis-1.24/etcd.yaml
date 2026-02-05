@@ -92,7 +92,7 @@ groups:
                 op: eq
                 value: true
         remediation: |
-          Edit the etcd pod specification file $etcdconf on the master
+          Edit the etcd pod specification file $etcdconf on the control plane
           node and set the below parameter.
           --peer-client-cert-auth=true
         scored: true
