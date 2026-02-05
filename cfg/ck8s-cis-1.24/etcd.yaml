@@ -129,6 +129,6 @@ groups:
           Follow the etcd documentation and create a dedicated certificate authority setup for the
           etcd service.
           Then, edit the etcd pod specification file $etcdconf on the
-          master node and set the below parameter.
+          control plane node and set the below parameter.
           --trusted-ca-file=</path/to/ca-file>
         scored: false
