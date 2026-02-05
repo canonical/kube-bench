@@ -21,7 +21,7 @@ groups:
         remediation: |
           Follow the etcd service documentation and configure TLS encryption.
           Then, edit the etcd pod specification file /etc/kubernetes/manifests/etcd.yaml
-          on the master node and set the below parameters.
+          on the control plane node and set the below parameters.
           --cert-file=</path/to/ca-file>
           --key-file=</path/to/key-file>
         scored: true
