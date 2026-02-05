@@ -112,7 +112,7 @@ groups:
                 op: eq
                 value: false
         remediation: |
-          Edit the etcd pod specification file $etcdconf on the master
+          Edit the etcd pod specification file $etcdconf on the control plane
           node and either remove the --peer-auto-tls parameter or set it to false.
           --peer-auto-tls=false
         scored: true
