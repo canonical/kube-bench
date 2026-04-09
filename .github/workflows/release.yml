@@ -15,17 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
         with:
           go-version: ${{ env.GO_VERSION }}
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
       - name: Run unit tests
         run: make tests
       - name: Setup Kubernetes cluster (KIND)
-        uses: engineerd/setup-kind@v0.6.2
+        uses: engineerd/setup-kind@71e45b960fc8dd50b4aeabf6eb6ef2ca0920b4c1 # v0.6.2
         with:
           version: ${{ env.KIND_VERSION }}
           image: ${{ env.KIND_IMAGE }}
@@ -38,13 +38,13 @@ jobs:
         run: |
           make integration-test
       - name: Compare output with expected output
-        uses: GuillaumeFalourd/diff-action@v1
+        uses: GuillaumeFalourd/diff-action@b341507d1da990caceac1b3b31b8f55eebaa2e99 # v1
         with:
           first_file_path: ./test.data
           second_file_path: integration/testdata/Expected_output.data
           expected_result: PASSED
       - name: Release
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6
         with:
           distribution: goreleaser
           version: v1.7.0
